@@ -11,6 +11,7 @@
 * [jsonwebtoken]
 * [dotenv]
 * [nodemon]
+* [validator]
 
 ## Tools
 
