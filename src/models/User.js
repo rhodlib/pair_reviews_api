@@ -1,7 +1,7 @@
 //Imports
 const { Schema, model } = require('mongoose');
 const validator = require('validator');
-
+const bcrypt = require("bcryptjs");
 
 //User Schema
 const userSchema = new Schema({
@@ -48,6 +48,28 @@ const userSchema = new Schema({
     timestamps: true
 });
 
-const user = model('User', userSchema);
 
-module.exports = user;
+//Static methods for userSchemas
+userSchema.statics.findByCredentials = async (email, password) => {
+    const user = await User.findOne({email});
+    if(!user) {
+        throw new Error("Unable to login");
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log(isMatch);
+    if(!isMatch) {
+        throw new Error("Unable to login");
+    }
+
+    return user;
+}
+
+//New methods for userSchema
+userSchema.methods.encryptPassword = async (password) => {
+    return await bcrypt.hash(password, 8);
+}
+
+const User = model('User', userSchema);
+
+module.exports = User;
