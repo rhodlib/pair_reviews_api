@@ -80,10 +80,13 @@ userSchema.statics.findByCredentials = async (email, password) => {
 };
 
 //New methods for userSchema
+
+//Encrypt Password
 userSchema.methods.encryptPassword = async (password) => {
     return await bcrypt.hash(password, 8);
 };
 
+//Generate Authentication Token
 userSchema.methods.generateAuthToken = async function() {
     const user = this;
 
@@ -94,6 +97,20 @@ userSchema.methods.generateAuthToken = async function() {
     
     return token;
 };
+
+//Get public profile
+userSchema.methods.toJSON = function() {
+    const user = this;
+    const userObject = user.toObject();
+
+    delete userObject.isAdmin;
+    delete userObject.password;
+    delete userObject.votes;
+    delete userObject.areaVotePoints;
+    delete userObject.tokens;
+
+    return userObject;
+}
 
 const User = model('User', userSchema);
 
