@@ -4,32 +4,28 @@ const User = require("../models/User");
 //Variable
 const userCtrl = {};
 
-//Register user endpoint
-userCtrl.registerUser = async(req, res) => {
-    const newUser = new User(req.body);
+//User logout
+userCtrl.userLogout = async(req, res) => {
     try {
-        newUser.password = await newUser.encryptPassword(newUser.password);
-        await newUser.save();
-        const token = newUser.generateAuthToken();
-        res.status(201).send({ newUser, token });
-    }  catch(error) {
-        res.status(400).send(error);
-    }
-};
+        req.user.tokens = req.user.tokens.filter( token => token.token !== req.token );
+        await req.user.save();
 
-//Login user endpoint
-userCtrl.loginUser = async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await User.findByCredentials(email, password);
-        const token = await user.generateAuthToken();
-        res.send({ user, token });
+        res.send();
     } catch(error) {
-        res.status(400).send();
+        res.status(500).send();
     }
 };
 
-//Logout user endpoint
+//User logout All
+userCtrl.userLogoutAll = async(req, res) => {
+    try {
+        req.user.tokens = [];
+        await req.user.save();
+        res.send();
+    } catch(error) {
+        res.status(500).send();
+    }
+}
 
 //Get all users
 userCtrl.getUsers = async(req, res) => {
@@ -39,9 +35,12 @@ userCtrl.getUsers = async(req, res) => {
     } catch(error) {
         res.status(500).send(error);
     }
-}
+};
 
 //Profile user endpoint
+userCtrl.getProfile = async (req, res) => {
+    res.send(req.user);
+};
 
 //Export router
 module.exports = userCtrl;

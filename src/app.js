@@ -1,6 +1,7 @@
 //Imports
 const express = require("express");
 const userRoutes = require("./routes/user");
+const authRoutes = require("./routes/authentication");
 
 //Initializations
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 //Routes
+app.use(authRoutes);
 app.use(userRoutes);
 
 
