@@ -10,7 +10,8 @@ userCtrl.registerUser = async(req, res) => {
     try {
         newUser.password = await newUser.encryptPassword(newUser.password);
         await newUser.save();
-        res.status(201).send(newUser);
+        const token = newUser.generateAuthToken();
+        res.status(201).send({ newUser, token });
     }  catch(error) {
         res.status(400).send(error);
     }
@@ -21,7 +22,8 @@ userCtrl.loginUser = async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await User.findByCredentials(email, password);
-        res.send(user);
+        const token = await user.generateAuthToken();
+        res.send({ user, token });
     } catch(error) {
         res.status(400).send();
     }

@@ -2,6 +2,7 @@
 const { Schema, model } = require('mongoose');
 const validator = require('validator');
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 //User Schema
 const userSchema = new Schema({
@@ -28,22 +29,35 @@ const userSchema = new Schema({
         minlength: 6,
         trim: true,
     },
-    votes: {
-        type: [{
-            area: String,
-            comment: String
-        }],
-    },
+    votes: [{
+        area: {
+            type: String,
+            require: true,
+        },
+        comment: {
+            type: String
+        }
+    }],
     isAdmin: {
         type: Boolean,
         default: false
     },
-    areaVotePoints: {
-        type: [{
-            name: String,
-            area: String
-        }]
-    },
+    areaVotePoints: [{
+        name: {
+            type: String,
+            require: true
+        },
+        area: {
+            type: String,
+            require: true
+        }
+    }],
+    tokens: [{
+        token: {
+            type: String,
+            require: true
+        }
+    }]
 }, {
     timestamps: true
 });
@@ -63,12 +77,23 @@ userSchema.statics.findByCredentials = async (email, password) => {
     }
 
     return user;
-}
+};
 
 //New methods for userSchema
 userSchema.methods.encryptPassword = async (password) => {
     return await bcrypt.hash(password, 8);
-}
+};
+
+userSchema.methods.generateAuthToken = async function() {
+    const user = this;
+
+    const token = jwt.sign({ _id: user._id.toString() }, "thisismytoken");
+    user.tokens = user.tokens.concat({ token });
+
+    await user.save();
+    
+    return token;
+};
 
 const User = model('User', userSchema);
 
