@@ -3,6 +3,7 @@ const { Schema, model } = require('mongoose');
 const validator = require('validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Area = require("../models/Area");
 
 //User Schema
 const userSchema = new Schema({
@@ -112,6 +113,25 @@ userSchema.methods.toJSON = function() {
     return userObject;
 }
 
+//Count votes
+userSchema.methods.countVotes = async function() {
+    const user = this;
+    const areas = await Area.find({});
+    
+    const userVotes = areas.map(area => {
+        const count = 0;
+        user.votes.forEach( vote => {
+            if( vote.area === area.name ){
+                count++;
+            }
+        });
+        return { name: area.name, votes: count };
+    })
+
+    return userVotes;
+}
+
 const User = model('User', userSchema);
 
+//Export module
 module.exports = User;

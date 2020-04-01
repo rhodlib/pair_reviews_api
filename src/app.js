@@ -3,7 +3,7 @@ const express = require("express");
 const userRoutes = require("./routes/user");
 const authRoutes = require("./routes/authentication");
 const adminRoutes = require("./routes/admin");
-const areaRoutes = require("./routes/areas");
+const areaRoutes = require("./routes/area");
 
 //Initializations
 const app = express();

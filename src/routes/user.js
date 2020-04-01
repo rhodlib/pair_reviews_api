@@ -14,4 +14,5 @@ router.post("/api/user/logoutall", auth, userLogoutAll);
 
 router.get("/api/user/profile", auth, getProfile);
 
+//Export module
 module.exports = router;
