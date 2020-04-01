@@ -1,6 +1,6 @@
 # PAIR REVIEWS API
 
-## API challenge made in NodeJS
+## API challenge made with NodeJS
 
 ## Technologies
 
