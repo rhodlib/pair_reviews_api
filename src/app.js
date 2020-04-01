@@ -2,6 +2,8 @@
 const express = require("express");
 const userRoutes = require("./routes/user");
 const authRoutes = require("./routes/authentication");
+const adminRoutes = require("./routes/admin");
+const areaRoutes = require("./routes/areas");
 
 //Initializations
 const app = express();
@@ -16,6 +18,8 @@ app.use(express.urlencoded({extended: false}));
 //Routes
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(adminRoutes);
+app.use(areaRoutes);
 
 
 //Exports
