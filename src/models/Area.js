@@ -9,4 +9,5 @@ const Area = model('Area', {
     }
 });
 
+//Export module
 module.exports = Area;

@@ -1,5 +1,6 @@
 //Imports
 const User = require("../models/User");
+const Area = require("../models/Area");
 
 //Variable
 const adminCtrl = {};
@@ -34,7 +35,6 @@ adminCtrl.getEmployeesCant = async(req, res) => {
 }
 
 //Get emplotee most vote for area.
-
 
 //Export router
 module.exports = adminCtrl;
