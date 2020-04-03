@@ -33,7 +33,7 @@ userCtrl.userLogoutAll = async (req, res) => {
 userCtrl.getUsers = async (req, res) => {
   try {
     const users = await User.find({ isAdmin: false });
-    const users = users.filter(user => req.user._id !== user._id);
+    users = users.filter(user => req.user._id !== user._id);
     res.send(users);
   } catch (error) {
     res.status(500).send(error);
@@ -49,7 +49,7 @@ userCtrl.sendVoteUser = async (req, res) => {
   //Find user to vote by ID.
   const user = await User.findById({ _id });
   //Find reqUser to prevent errors.
-  const reqUser = await User.findById(reqUser._id);
+  reqUser = await User.findById(reqUser._id);
 
   if(!user._id === reqUser._id) {
     //Verify if reqUser is enable to vote this area.
