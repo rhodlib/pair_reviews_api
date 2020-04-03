@@ -1,40 +1,41 @@
 //Imports
 const User = require("../models/User");
-const Area = require("../models/Area");
 
 //Variable
 const adminCtrl = {};
 
 //Get most vote employee
-adminCtrl.getEmployeesMostVote = async(req, res) => {
-    const user = req.user;
-    if(!user.isAdmin) {
-        return res.status(400).send("You do not have necessary privileges");
-    }
+adminCtrl.getEmployeesMostVote = async (req, res) => {
+  const user = req.user;
+  if (user.isAdmin) {
     try {
-        const users = await User.find({});
-        const sortUser = users.sort((a, b) => b.votes.length - a.votes.length);
-        res.send(sortUser);
-    } catch(error) {
-        res.status(500).send(error);
+      const users = await User.find({});
+      const sortUser = users.sort((a, b) => b.votes.length - a.votes.length);
+      res.send(sortUser);
+    } catch (error) {
+      res.status(500).send(error);
     }
-}
+  } else {
+    return res.status(400).send("You do not have necessary privileges");
+  }
+};
 
 //Get employee register cant
-adminCtrl.getEmployeesCant = async(req, res) => {
-    const user = req.user;
-    if(!user.isAdmin) {
-        return res.status(400).send("You do not have necessary privileges");
-    }
+adminCtrl.getEmployeesCant = async (req, res) => {
+  const user = req.user;
+  if (user.isAdmin) {
     try {
-        const users = await User.find({ isAdmin: false });
-        res.send(users);
-    } catch(error) {
-        res.status(500).send(error);
-    }    
-}
+      const users = await User.find({ isAdmin: false });
+      res.send(users.length());
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  } else {
+    return res.status(400).send("You do not have necessary privileges");
+  }
+};
 
-//Get emplotee most vote for area.
+//Get employee most vote for area.
 
 //Export router
 module.exports = adminCtrl;

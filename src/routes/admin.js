@@ -1,7 +1,10 @@
 //Imports
 const { Router } = require("express");
 const router = Router();
-const { getEmployeesMostVote, getEmployeesCant } = require("../controllers/admin.controller");
+const {
+  getEmployeesMostVote,
+  getEmployeesCant
+} = require("../controllers/admin.controller");
 const auth = require("../middlewares/auth");
 
 //Routes

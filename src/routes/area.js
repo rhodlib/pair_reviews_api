@@ -1,11 +1,16 @@
 //Imports
 const { Router } = require("express");
-const { getAreas, createArea, deleteAreaById, deleteAllAreas } = require("../controllers/area.controller");
+const {
+  getAreas,
+  createArea,
+  deleteAreaById,
+  deleteAllAreas
+} = require("../controllers/area.controller");
 const auth = require("../middlewares/auth");
 const router = Router();
 
 //Routes
-router.get("/api/areas/read", getAreas);
+router.get("/api/areas/read",auth, getAreas);
 
 router.post("/api/areas/create", auth, createArea);
 
