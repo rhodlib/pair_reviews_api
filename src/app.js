@@ -9,18 +9,17 @@ const areaRoutes = require("./routes/area");
 const app = express();
 
 //Configure
-app.set('port', process.env.PORT || 4000);
+app.set("port", process.env.PORT || 4000);
 app.use(express.json());
 
 //Middlewares
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 //Routes
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(adminRoutes);
 app.use(areaRoutes);
-
 
 //Exports
 module.exports = app;
