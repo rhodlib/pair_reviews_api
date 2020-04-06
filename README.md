@@ -2,6 +2,15 @@
 
 ## API challenge made with NodeJS
 
+## To run this app on local machine
+
+1. Clone this repo on your PC
+2. Go to your terminal and search the folder
+3. Run `$ npm i ` to install all the dependencies
+4. Create a .env file with a variable inside "MONGODB_URI=" , to use your own database
+5. Run `$ node src/index.js` to start the server or `$ npm run start` to start the server on dev mode with nodemon
+6. now you can use all the endpoints detailed in the documentation to interact with the database
+
 ## Technologies
 
 * [nodeJS](https://nodejs.org/)

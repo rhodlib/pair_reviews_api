@@ -1,5 +1,6 @@
 //Imports
 const User = require("../models/User");
+const { votesByArea } = require("../utils/utils");
 
 //Variable
 const adminCtrl = {};
@@ -26,7 +27,7 @@ adminCtrl.getEmployeesCant = async (req, res) => {
   if (user.isAdmin) {
     try {
       const users = await User.find({ isAdmin: false });
-      res.send(users.length());
+      res.send(users.length);
     } catch (error) {
       res.status(500).send(error);
     }
@@ -36,6 +37,20 @@ adminCtrl.getEmployeesCant = async (req, res) => {
 };
 
 //Get employee most vote for area.
+adminCtrl.getMostVotedByArea = async (req, res) => {
+  const reqUser = req.user;
+  if (reqUser.isAdmin) {
+    try {
+      const users = await User.find({ isAdmin: false });
+      const userMostVotedByArea = await votesByArea(users);
+      res.send(userMostVotedByArea);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  } else {
+    return res.status(400).send("You do not have necessary privileges");
+  }
+}
 
 //Export router
 module.exports = adminCtrl;

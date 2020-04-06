@@ -3,7 +3,6 @@ const { Schema, model } = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Area = require("../models/Area");
 
 //User Schema
 const userSchema = new Schema(
@@ -43,7 +42,8 @@ const userSchema = new Schema(
         },
         comment: {
           type: String
-        }
+        },
+        timestamps: true
       }
     ],
     isAdmin: {
@@ -119,14 +119,6 @@ userSchema.methods.toJSON = function() {
   delete userObject.tokens;
 
   return userObject;
-};
-
-// Count votes
-userSchema.methods.countVotes = async function() {
-  return ((await Area.find({})) || []).map(area => ({
-    name: area.name,
-    votes: this.votes.filter(vote => vote.area === area.name).length
-  }));
 };
 
 const User = model("User", userSchema);
