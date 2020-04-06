@@ -2,6 +2,8 @@
 
 ## API challenge made with NodeJS
 
+[DOCS](https://bitbucket.org/rhodlib/pair_reviews_api/src/master/docs.md)
+
 ## To run this app on local machine
 
 1. Clone this repo on your PC
