@@ -13,14 +13,14 @@ Esta es una API que te permite obtener y/o generar diferentes datos desde una ba
 
 ## **Index**
 
-1. [Estructuras de datos](#Estructura%20de%20datos)
-    * [User](#User)
-    * [Area](#Area)
-2. [Rutas](#Rutas)
-    * [Autentificación](#Rutas%20de%20autentificación)
-    * [Administrador](#Rutas%20de%20administrador)
-    * [Areas](#Rutas%20de%20areas)
-    * [Usuarios](#Rutas%20de%20usuario)
+1. Estructuras de datos
+    * User
+    * Area
+2. Rutas
+    * Autentificación
+    * Administrador
+    * Areas
+    * Usuarios
 
 ---
 
