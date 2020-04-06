@@ -4,13 +4,33 @@ Esta es una API que te permite obtener y/o generar diferentes datos desde una ba
 
 ---
 
-## Estructura de datos
+* *Nombre del Tema:* Pair reviews api
+* *Autor:* Rodolfo Talibs || [Rhodlib](http://rhodlib.me)
+* *Creado:* 22/3/2020
+* *Versión:* 1.01
 
-### Tenemos solamente dos estructuras de datos llamadas models, hechas con **mongoose**
+---
+
+## **Index**
+
+1. [Estructuras de datos](#Estructura%20de%20datos)
+    * [User](#User)
+    * [Area](#Area)
+2. [Rutas](#Rutas)
+    * [Autentificación](#Rutas%20de%20autentificación)
+    * [Administrador](#Rutas%20de%20administrador)
+    * [Areas](#Rutas%20de%20areas)
+    * [Usuarios](#Rutas%20de%20usuario)
+
+---
+
+## **Estructura de datos**
+
+### Tenemos solamente dos estructuras de datos llamadas models, hechas con el sistema de Schemas **mongoose**
 
 ### **User**
 
-La Estructura principal de esa API, en esta almacenamos los siguientes datos.
+La estructura principal de esta API, en esta almacenamos los siguientes datos.
 
     {
         name: String,
@@ -53,6 +73,8 @@ La segunda estructura que contiene la base de datos, es la mas sencilla y se uti
 
 ---
 
+## **Rutas**
+
 ## Rutas de autentificación
 
 ### Rutas para manejar el registro y login de los usuarios
@@ -71,9 +93,11 @@ La segunda estructura que contiene la base de datos, es la mas sencilla y se uti
 
 `/api/users/cant` : Ruta que recibe una petición HTTP del tipo **GET**, devolviendo en formato **JSON** la cantidad de usuarios registrados, sin contar a los que tengan permisos de administrador.
 
+`/api/users/mostvotedbyarea` : Ruta que recibe una petición HTTP del tipo **GET**, devolviendo en formato **JSON** un array de las personas mas votadas por cada area.
+
 ---
 
-## Routas de areas
+## Rutas de areas
 
 ### Rutas para manejar las areas que existen en el sistema de votacion
 
