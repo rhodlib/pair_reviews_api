@@ -11,13 +11,19 @@ adminCtrl.getEmployeesMostVote = async (req, res) => {
   if (user.isAdmin) {
     try {
       const users = await User.find({});
-      const sortUser = users.sort((a, b) => b.votes.length - a.votes.length);
-      res.send(sortUser);
+      const sortUsers = users.sort((a, b) => b.votes.length - a.votes.length);
+      const displayUser = sortUsers.map((sortUser) => ({
+        name: sortUser.name,
+        votes: sortUser.votes.length,
+      }));
+      res.send(displayUser);
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).send({ error });
     }
   } else {
-    return res.status(400).send("You do not have necessary privileges");
+    return res
+      .status(400)
+      .send({ error: "You do not have necessary privileges" });
   }
 };
 
@@ -27,12 +33,14 @@ adminCtrl.getEmployeesCant = async (req, res) => {
   if (user.isAdmin) {
     try {
       const users = await User.find({ isAdmin: false });
-      res.send(users.length);
+      res.send({ employees: users.length });
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).send({ error });
     }
   } else {
-    return res.status(400).send("You do not have necessary privileges");
+    return res
+      .status(400)
+      .send({ error: "You do not have necessary privileges" });
   }
 };
 
@@ -45,12 +53,14 @@ adminCtrl.getMostVotedByArea = async (req, res) => {
       const userMostVotedByArea = await votesByArea(users);
       res.send(userMostVotedByArea);
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).send({ error });
     }
   } else {
-    return res.status(400).send("You do not have necessary privileges");
+    return res
+      .status(400)
+      .send({ error: "You do not have necessary privileges" });
   }
-}
+};
 
 //Export router
 module.exports = adminCtrl;

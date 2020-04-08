@@ -38,12 +38,13 @@ const userSchema = new Schema(
         },
         area: {
           type: String,
-          require: true
+          require: true,
+          trim: true
         },
         comment: {
           type: String
         },
-        timestamps: true
+        date: Date
       }
     ],
     isAdmin: {
@@ -55,6 +56,7 @@ const userSchema = new Schema(
         area: {
           type: String,
           require: true,
+          trim: true
         }
       }
     ],
@@ -114,9 +116,12 @@ userSchema.methods.toJSON = function() {
 
   delete userObject.isAdmin;
   delete userObject.password;
-  delete userObject.votes;
-  delete userObject.areaVotePoints;
+  //delete userObject.votes;
+  //delete userObject.areaVotePoints;
   delete userObject.tokens;
+  delete userObject.createdAt;
+  delete userObject.updatedAt;
+  delete userObject.__v;
 
   return userObject;
 };

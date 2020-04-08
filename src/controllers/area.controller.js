@@ -10,7 +10,7 @@ areaCtrl.getAreas = async (req, res) => {
     const areas = await Area.find({});
     res.send(areas);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error });
   }
 };
 
@@ -24,10 +24,12 @@ areaCtrl.createArea = async (req, res) => {
       await newArea.save();
       res.status(201).send({ newArea });
     } catch (error) {
-      res.status(400).send(error);
+      res.status(500).send({ error });
     }
   } else {
-    return res.status(400).send("You do not have necessary privileges");
+    return res
+      .status(400)
+      .send({ error: "You do not have necessary privileges" });
   }
 };
 
@@ -37,16 +39,18 @@ areaCtrl.deleteAreaById = async (req, res) => {
 
   if (user.isAdmin) {
     try {
-      const area = await Area.findOneAndDelete(req.params.id);
+      const area = await Area.findOneAndDelete({ _id: req.params.id });
       if (!area) {
         return res.status(404).send();
       }
       res.send(area);
     } catch (error) {
-      res.status(400).send(error);
+      res.status(500).send({ error });
     }
   } else {
-    return res.status(400).send("You do not have necessary privileges");
+    return res
+      .status(400)
+      .send({ error: "You do not have necessary privileges" });
   }
 };
 
@@ -59,10 +63,12 @@ areaCtrl.deleteAllAreas = async (req, res) => {
       const areas = await Area.deleteMany({});
       res.send(areas);
     } catch (error) {
-      res.status(500).send();
+      res.status(500).send({ error });
     }
   } else {
-    return res.status(400).send("You do not have necessary privileges");
+    return res
+      .status(400)
+      .send({ error: "You do not have necessary privileges" });
   }
 };
 

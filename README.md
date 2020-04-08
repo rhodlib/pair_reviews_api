@@ -2,13 +2,13 @@
 
 ## API challenge made with NodeJS
 
-[DOCS](https://bitbucket.org/rhodlib/pair_reviews_api/src/master/docs.md)
+[DOCS](https://app.swaggerhub.com/apis-docs/rhodlib/pair-reviews-api/1.0.0)
 
 ## To run this app on local machine
 
 1. Clone this repo on your PC
 2. Go to your terminal and search the folder
-3. Run `$ npm i ` to install all the dependencies
+3. Run `$ npm i` to install all the dependencies
 4. Create a .env file with a variable inside "MONGODB_URI=" , to use your own database
 5. Run `$ node src/index.js` to start the server or `$ npm run start` to start the server on dev mode with nodemon
 6. now you can use all the endpoints detailed in the documentation to interact with the database
@@ -24,9 +24,11 @@
 * [nodemon](https://www.npmjs.com/package/nodemon)
 * [validator](https://www.npmjs.com/package/validator)
 * [prettier](https://prettier.io/)
+* [ts-optchain](https://github.com/rimeto/ts-optchain)
 
 ## Tools
 
 * [Chrome](https://www.google.com/intl/es-419/chrome/)
 * [VScode](https://code.visualstudio.com/)
 * [Insomnia](https://insomnia.rest/)
+* [swagger](https://swagger.io/)
